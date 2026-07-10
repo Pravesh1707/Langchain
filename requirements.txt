@@ -1,0 +1,9 @@
+Langchain
+python-dotenv
+langchain_community
+langchain_openai
+langchain_huggingface
+sentence-transformers
+cromadb
+faiss-gpu
+langchain_google_genai

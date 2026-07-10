@@ -1,0 +1,8 @@
+Langchain
+python-dotenv
+langchain_community
+unstructured
+langchain_openai
+langchain_huggingface
+sentence-transformers
+cromadb
