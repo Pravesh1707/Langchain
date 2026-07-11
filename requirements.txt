@@ -7,3 +7,4 @@ sentence-transformers
 cromadb
 faiss-gpu
 langchain_google_genai
+grandalf
