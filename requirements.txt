@@ -4,7 +4,10 @@ langchain_community
 langchain_openai
 langchain_huggingface
 sentence-transformers
-cromadb
-faiss-gpu
+# cromadb
+# faiss-gpu
 langchain_google_genai
 grandalf
+langchain_groq
+langserve
+fastapi
