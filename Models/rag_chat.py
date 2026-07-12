@@ -1,0 +1,11 @@
+from langchain_groq import ChatGroq
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.messages import SystemMessage,HumanMessage,AIMessage
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings
+from langchain_chroma import Chroma
+from langchain_classic.chains.retrieval import create_retrieval_chain
+from langchain_classic.chains.combine_documents import create_stuff_documents_chain
+from dotenv import load_dotenv
+load_dotenv()
