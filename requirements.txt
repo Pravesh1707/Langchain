@@ -11,3 +11,5 @@ grandalf
 langchain_groq
 langserve
 fastapi
+requests
+uvicorn
