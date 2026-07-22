@@ -1,3 +1,4 @@
+# Task 5 Create FastAPI Application
 from langchain_groq import ChatGroq
 from langchain_core.output_parsers import StrOutputParser,PydanticOutputParser
 from pydantic import BaseModel,Field
@@ -30,4 +31,4 @@ def chatbot(request:QA):
 
     response = chain.invoke({'question':request.Question})
 
-    return {'answer':response}
+    return {'answer':response['answer']}
