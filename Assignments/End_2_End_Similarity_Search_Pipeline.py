@@ -53,22 +53,35 @@ def Generate_embeddings(data,model,store):
         embedding = OpenAIEmbeddings(model="text-embedding-3-small")
         vector_store = store.from_documents(data,embedding)
         st.sidebar.success('Embedings Created Stat Searching')
+        return vector_store
 
     elif model == 'Google Gemini':
         embedding = GoogleGenerativeAIEmbeddings(model='gimini-3.1-flash')
         vector_store = store.from_documents(data,embedding)
         st.sidebar.success('Embedings Created Stat Searching')
+        return vector_store
 
     elif model == 'HuggingFace':
         embedding = HuggingFaceEmbeddings(model='sentence-transformers/all-mpnet-base-v2')
         vector_store = store.from_documents(data,embedding)
         st.sidebar.success('Embedings Created Stat Searching')
+        return vector_store
 
     else:
         st.sidebar.write('select Embedding Model')
-        return
-    
-    return vector_store
+    return ""
+
+def Web(url):
+    loader = Web_Loader(url)
+    # st.write(loader)
+    st.sidebar.success(f'Document Loaded ')
+
+    data = Text_Splitter(loader)
+    # st.write(f'Chunk Length : {len(data)} \n {data}')
+
+    st.sidebar.success(f'Chunks Size : {len(data)} ')
+
+    return data
 
 
 st.title('Mini Project - End to End Similarity Search Pipeline')
@@ -77,9 +90,28 @@ radio_opt = st.sidebar.radio('Where you want to search ?',options=['Web','File']
 
 if radio_opt == 'Web':
     url = st.sidebar.text_input('Provide the public URL ')
-    if url:
-        loader = Web_Loader(url)
-        st.write(loader)
+    loader_btn = st.sidebar.button('Start Process')
+
+    if url and loader_btn:
+        data = Web(url)
+        
+        embeding_model = st.sidebar.radio('Select Embedding Model',options=['OpenAI','Google Gemini','HuggingFace'])
+        st.write(f'Selected Embeding Model : {embeding_model}')
+
+        store = st.sidebar.radio('Select Vector Store',options=['FAISS','Chroma','InMemoryVectorStore'])
+        st.write(f' Selected vector Store : {store}')
+
+        embd_btn = st.sidebar.button('Embeding Doc')
+        if embd_btn:
+            vector_store = Generate_embeddings(data,embeding_model,store)
+            st.sidebar.success('Vector Store Created')
+
+            query = st.text_input('Ask Your Query from Document')
+            try:
+                response = vector_store.similarity_search(query)
+                st.write(response)
+            except Exception as e:
+                st.write(f'Error : {e}')
 
 else:
     uploaded_file = st.sidebar.file_uploader('Upload your file',type=['pdf','txt','csv'])
@@ -109,7 +141,10 @@ else:
 
         query = st.text_input('Ask Your Query from Document')
 
-        response = vector_store.similarity_search(query)
+        try:
+            response = vector_store.similarity_search(query)
+            st.write(response)
 
-        st.write(response)
+        except Exception as e:
+            st.write(f'Error : {e}')
 
