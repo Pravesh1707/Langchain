@@ -23,7 +23,7 @@ import streamlit as st
 
 def generate_embeddings(file):
     temp_file = './temporary.pdf'
-    with open(temp_file,'wb') as f:
+    with open(temp_file,'wb') as f: 
         f.write(file.getvalue())
     
     loader = PyPDFLoader(temp_file)
