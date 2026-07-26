@@ -1,16 +1,22 @@
+# Langchain Summarise Chain
 from langchain_classic.chains.summarize import load_summarize_chain
 
+# Models or LLMs
 from langchain_huggingface import ChatHuggingFace
 from langchain_openai import ChatOpenAI
 from langchain_groq import ChatGroq
 
+# ENV Variables
 from dotenv import load_dotenv
 
+#Prompt
 from langchain_core.prompts import PromptTemplate
 
+# Documant Loader and Text Splitter
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
+# for UI
 import streamlit as st 
 
 load_dotenv()
