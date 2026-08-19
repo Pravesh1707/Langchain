@@ -16,7 +16,7 @@ memory = ConversationBufferMemory(
     return_messages=True
 )
 
-prompt = PromptTemplate(template="Chat History: {chat_history}\n\n Human: {input}\nAI:",input_variables=["input"],memory_template = memory)
+prompt = PromptTemplate(template="Chat History: {chat_history}\n\n Human: {input}",input_variables=["input"],memory_template = memory)
 
 conversation_chain = LLMChain(llm=model,prompt = prompt, memory = memory,output_key="text")
 
