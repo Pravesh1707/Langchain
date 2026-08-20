@@ -24,8 +24,8 @@ def get_weather(city:str)->str:
     key = city.strip().lower()
     # data = 
     weather_wrapper = OpenWeatherMapAPIWrapper()
-    data = WeatherDataLoader(client=weather_wrapper,places=city)
-    # weather_tool = OpenWeatherMapQueryRun(api_wrapper=weather_wrapper)
+    data = WeatherDataLoader(client=weather_wrapper,places=key)
+    result = data.load()
 
     return (
         f"City : {city.strip().title()}\n"
